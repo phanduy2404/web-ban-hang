@@ -12,15 +12,18 @@
 	  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Dancing+Script" rel="stylesheet">
 </head>
 <body class="container">
+	<form action="index.php" method="post">
+	<button type="submit" class="btn btn-success">Return Home </button>
+	</form>
 	<h1 class="text-center text-danger mb-5" 
-	style="font-family: 'Abril Fatface', cursive;"> ONLINE SHOPPING CART PHP MYSQLI</h1>
-
+	style="font-family: 'Abril Fatface', cursive;">Shopping At 1992 Shop </h1>
+	
 	<div class="row">
 
 	<?PHP
 
 	$con = mysqli_connect('localhost','root');
-	mysqli_select_db($con,'ytshoppingcart');
+	mysqli_select_db($con,'quanlybanhang');
 
 	// if($con){
 	// 	echo "connection succussful";
@@ -28,8 +31,7 @@
 	// 	echo "no connection";
 	// }
 
-
-	$query = " SELECT `name`, `image`, `price`, `discount` FROM `ytshoppingcart` order by id ASC ";
+	$query = " SELECT * FROM `hanghoa` order by MSHH ASC ";
 
 	$queryfire = mysqli_query($con, $query);
 
@@ -39,26 +41,23 @@
 		while($product = mysqli_fetch_array($queryfire)){
 			?>
 			
-		<div class="col-lg-3 col-md-3 col-sm-12">
-			
+		<div class="col-lg-4 col-md-3 col-sm-12">
 			<form>
 				<div class="card">
 					<h6 class="card-title bg-info text-white p-2 text-uppercase"> <?php echo
-					 $product['name'];  ?>   </h6>
+					 $product['TenHH'];  ?> <span>(Mã <?php echo  $product['MaNhom']; ?>) </span>  </h6>
 
 					<div class="card-body">
 						 <img src="<?php echo
-					 $product['image'];  ?>" alt="phone" class="img-fluid mb-2" >
+					 $product['Hinh'];  ?>" alt="phone" class="img-fluid mb-2" >
 
-					 <h6> &#8377; <?php echo $product['price'];  ?><span> (<?php echo $product['discount'];  ?>% off) </span> </h6> 
-
-					 <h6 class="badge badge-success"> 4.4 <i class="fa fa-star"> </i> </h6>
+					 <h6> <?php echo $product['Gia']; ?><span>( Số lượng: <?php echo $product['SoLuongHang']; ?> ) </span> </h6> 
 
 					 <input type="text" name="" class="form-control" placeholder="Quantity">
 
 					</div>
 					<div class="btn-group d-flex">
-						<button class="btn btn-success flex-fill"> Add to cart </button> <button class="btn btn-warning flex-fill text-white"> BUy Now </button>
+						<button class="btn btn-success flex-fill"> Add to cart </button> <button class="btn btn-warning flex-fill text-white"> Buy Now </button>
 					</div>
 
 
@@ -72,8 +71,6 @@
 		}
 	}
 	?>
-
-
-</div>
+	
 </body>
 </html>
